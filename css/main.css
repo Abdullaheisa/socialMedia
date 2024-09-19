@@ -1,0 +1,26 @@
+@media (max-width: 768px) {
+    .links {
+        display: block;
+        position: absolute;
+        flex-direction: column;
+        top: 77px;
+        right: 20px;
+        transition: .3s;
+        padding: 10px;
+        width: 60%;
+        border-radius: 10px;
+    }
+    .links.active {
+        right: -100%;
+    }
+    .links li a{
+        width: 100%;
+        padding: 10px;
+        margin: 0;
+        margin-bottom: 5px;
+        display: block;
+        border-radius: 5px;
+        visibility: visible;
+    }
+    
+}

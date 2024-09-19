@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostPage</title>
+    <link rel="stylesheet" href="css/output.css">
+    <link rel="stylesheet" href="css/all.min.css">
+
+    <style>
+        .lds-dual-ring {
+        /* change color here */
+        /* color: #4a4e509b */
+        color: #0089b3
+        }
+        .lds-dual-ring,
+        .lds-dual-ring:after {
+        box-sizing: border-box;
+        }
+        .lds-dual-ring {
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+        }
+        .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6.4px solid currentColor;
+        border-color: currentColor transparent currentColor transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+        }
+        @keyframes lds-dual-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-dim-700">
+    
+  
+    <!-- Alert -->
+    <div id="alert-suc" class=" w-52  md:w-96 bottom-0 -left-full z-50 fixed transition-all duration-1000 right-[90px] top-14">
+        <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-dim-900 dark:text-green-400" role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+            <span class="font-medium" id="content_alert"></span>
+            </div>
+        </div>
+    </div>
+    <div id="alert-err" class=" w-52  md:w-96 bottom-0 -left-full z-50 fixed transition-all duration-1000">
+        <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+            <span class="font-medium" id="content-err"></span>
+            </div>
+        </div>
+    </div>
+    <div id="loaderd" class="fixed top-1/2 left-1/2 bg-[#4a4e509b] rounded-2xl z-[9999999]">
+        <div class="lds-dual-ring"></div>
+
+    </div> 
+
+<div id="container">
+            
+
+
+
+        <!-- Nav bar -->
+        <div class="   top-0 container mx-auto flex xl:max-w-[1000px]">
+            <div class="container mx-auto xl:max-w-[850px]">
+                
+
+                <nav class="bg-white border-gray-200 dark:bg-dim-900 rounded-lg">
+                    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                        <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+                            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Social Media</span>
+                        </a>
+                        <div class="flex gap-3 items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+
+                            <button onclick="openModalLog('login-user')" type="button" id="login-btn" data-modal-target="login-user" data-modal-toggle="login-user" class=" py-2 px-4 me-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white transition dark:hover:bg-gray-700">Log In</button>
+                            <button onclick="openModalLog('register-user')" type="button" id="register-btn" data-modal-target="register-user" data-modal-toggle="register-user" class=" py-2 px-4 me-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white transition dark:hover:bg-gray-700">Sign In</button>
+                            <button type="button" class="  flex text-sm  rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                                <span class="sr-only">Open user menu</span>
+
+                                <img  class="w-8 h-8 rounded-full hidden" id="imageLogIn" src="image/images.png" alt="user photo">
+                            </button>
+                                <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none transition rounded-lg text-sm p-2.5">
+                                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                                </button>
+                            <!-- Dropdown menu -->
+                            <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+                                <div class="px-4 py-3">
+                                    <span onclick="profileClicked()" id="name-show" class="block text-sm text-gray-900 cursor-pointer dark:text-white">abdullah Eissa</span>
+                                    <span id="email-show" class="block text-sm  text-gray-500 truncate dark:text-gray-400">abdullah@gmail.com</span>
+                                </div>
+                                <ul class="py-2" aria-labelledby="user-menu-button">
+                                    <li>
+                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" onclick="logOutUser()">Log out</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user" aria-expanded="false">
+                                <span class="sr-only">Open main menu</span>
+                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
+                        <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-dim-900 dark:border-gray-700">
+                            <li>
+                            <a href="index.html" class="block cursor-pointer transition py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</a>
+                            </li>
+                            <li>
+                            <a onclick="profileClicked()" class="block cursor-pointer transition py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Profile</a>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                </nav>
+    
+            </div>
+        </div>
+    <!-- Container post -->
+    <div class="container mx-auto h-screen flex xl:max-w-[1000px]">
+        <div class="container mx-auto xl:max-w-[850px]">
+            
+
+            <div class="my-6 " id="containerPost">
+
+            </div>
+
+            
+
+        </div>
+    </div>
+
+
+
+
+
+        <!-- Main modal Login-->
+        <div id="login-user"  aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-dim-700">
+                    <!-- Modal header -->
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                            Log in
+                        </h3>
+                        <button onclick="closeModal('login-user')" type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="login-user">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-4 md:p-5">
+                        <form class="space-y-4" action="#">
+                            <div>
+                                <label for="username-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                                <div class="flex">
+                                <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md bg-transparent dark:text-gray-400 dark:border-gray-600">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
+                                    </svg>
+                                </span>
+                                <input type="text" value="abdullah22" id="username-input" class="rounded-none rounded-e-lg transition bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Bonnie Green">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="password-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
+                                <input type="password" value="123456" name="password" id="password-input" placeholder="••••••••" class="bg-gray-50 border transition border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-transparent dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                            </div>
+                            <div class="flex justify-between">
+                                <div class="flex items-start">
+                                    <div class="flex items-center h-5">
+                                        <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 bg-transparent dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"  />
+                                    </div>
+                                    <label for="remember" class="ms-2 cursor-pointer text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
+                                </div>
+                                <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
+                            </div>
+                            <button type="button" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="loginBtnClicked()">Login to your account</button>
+                            <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                                Not registered? <a  class="text-blue-700 cursor-pointer hover:underline dark:text-blue-500">Create account</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+
+
+
+
+
+        <!-- Main modal register-->
+        <div id="register-user" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-dim-700">
+                    <!-- Modal header -->
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                            Sign in 
+                        </h3>
+                        <button onclick="closeModal('register-user')" type="button" class="end-2.5 text-gray-400 bg-transparent transition-all hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="register-user">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-4 md:p-5">
+                        <form class="space-y-4" action="#">
+                            <div>
+                                <label for="website-admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                                <div class="flex">
+                                <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md bg-transparent dark:text-gray-400 dark:border-gray-600">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
+                                    </svg>
+                                </span>
+                                <input type="text" id="reg-username-input" class="rounded-none rounded-e-lg transition bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="@abdullh">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="reg-name-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
+                                <input type="text" name="name" id="reg-name-input" placeholder="Enter Your name" class="bg-gray-50 transition border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-transparent dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                            </div>
+                            <div>
+                                <label for="email-address-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
+                                <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                                    <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+                                    <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
+                                    </svg>
+                                </div>
+                                <input type="text" id="reg-email-input" class="bg-gray-50 border border-gray-300 transition text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="user_avatar">Upload Image</label>
+                                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg transition cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none bg-transparent dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="reg-image-input" id="reg-image-input" type="file">
+                            </div>
+                            <div>
+                                <label for="reg-password-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
+                                <input type="password" name="password" id="reg-password-input" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-transparent dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                            </div>
+                            <div class="flex justify-between">
+                                <div class="flex items-start">
+                                    <div class="flex items-center h-5">
+                                        <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 transition rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"  />
+                                    </div>
+                                    <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
+                                </div>
+                                <a href="#" class="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
+                            </div>
+                            <button type="button" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="registerBtnClicked()">Sign in</button>
+                            <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                                <a  class="text-blue-700 cursor-pointer hover:underline dark:text-blue-500">Log in</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+
+                <!-- Main modal create post-->
+                <div id="create-post" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative p-4 w-full max-w-md max-h-full">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-dim-700">
+                            <!-- Modal header -->
+                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                <h3 id="post_modal_title" class="text-xl font-semibold text-gray-900 dark:text-white">
+                                    Create a New Post
+                                </h3>
+                                <button onclick="closeModal('create-post')" type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="create-post">
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                    </svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="p-4 md:p-5">
+                                <form class="space-y-4" action="#">
+                                    <input type="hidden" id="post_id_input" value="">
+                                    <div>
+                                        <label for="post-body-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your post</label>
+                                        <textarea id="post-body-input" rows="4" class="block p-2.5 w-full text-sm resize-none text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-center w-full">
+                                        <label for="post-image-input" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                <svg class="w-5 h-5 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                                </svg>
+                                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                                <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                            </div>
+                                            <input id="post-image-input" type="file" class="hidden" />
+                                        </label>
+                                    </div> 
+        
+        
+                                    <button id="postModalSubmit" type="button" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="createNewPostClicked()">Publish Post</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                        <!-- modal delete post -->
+        <div id="popup-delete" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <button onclick="closeModal('popup-delete')" type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <input type="hidden" id="delete-post-id-btn">
+
+                    <div class="p-4 md:p-5 text-center">
+                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                        </svg>
+                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this Post?</h3>
+                        <button onclick="confirmPostDelete()" data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                            Yes, I'm sure
+                        </button>
+                        <button onclick="closeModal('popup-delete')" data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- modal delete post -->
+</div>
+    
+
+
+
+
+
+
+<script src="./node_modules/flowbite/dist/flowbite.min.js"></script>
+<script src="node_modules/axios/dist/axios.min.js"></script>
+<script src="js/logic.js"></script>
+<script src="./js/showPost.js"></script>
+<script src="js/darkMode.js"></script>
+</body>
+</html>

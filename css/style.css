@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components{
+    .link_active{
+        @apply flex text-xl font-medium justify-center items-start xl:justify-start md:bg-transparent bg-blue-400 text-white  md:text-blue-400 p-1;
+    }
+    .link{
+        @apply flex text-xl font-medium  justify-center items-center xl:justify-start text-gray-800 p-1 dark:text-white hover:text-blue-400  transition 
+        dark:hover:text-blue-400 duration-300 ease-in-out;
+    }
+    .icon{
+        @apply hidden xl:block font-bold xl:ml-4;
+    }
+    .button{
+        @apply py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-dim-50 transition focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-dim-900 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700
+    }
+
+}

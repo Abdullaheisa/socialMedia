@@ -1,0 +1,20 @@
+{
+  "name": "socialmedia",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "watch": "npx tailwindcss -i ./css/style.css -o ./css/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.10"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "bootstrap": "^5.3.3",
+    "flowbite": "^2.5.1"
+  }
+}
